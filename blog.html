@@ -172,7 +172,8 @@
 
   function renderPostCard(post) {
     const image = getImageUrl(post.thumbnail, 900);
-
+    console.log('POST THUMBNAIL:', post.thumbnail);
+    console.log('IMAGE URL:', image);
     return `
       <article class="post-card glass rounded-2xl overflow-hidden border border-purple-900/40">
         <a href="${postUrl(post)}" class="block">
