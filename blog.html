@@ -231,11 +231,13 @@
 
   async function loadBlog() {
     try {
+      console.log('BLOG SCRIPT STARTED');
       const [posts, categories] = await Promise.all([
         getPosts(),
         getCategories()
       ]);
-
+      console.log('SANITY POSTS:', posts);
+console.log('SANITY CATEGORIES:', categories);
       // Hiển thị số lượng bài viết
       const countElement = document.getElementById('post-count');
       if (countElement) {
