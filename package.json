@@ -4,9 +4,9 @@
   "description": "Pikapeo Labs portfolio and AI customer assistant",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sanity:dev": "sanity dev --config sanity/sanity.config.ts",
-    "sanity:build": "sanity build --config sanity/sanity.config.ts",
-    "sanity:deploy": "sanity deploy --config sanity/sanity.config.ts"
+    "sanity:dev": "sanity dev",
+    "sanity:build": "sanity build",
+    "sanity:deploy": "sanity deploy"
   },
   "keywords": [
     "portfolio",

@@ -21,11 +21,13 @@ const sanityConfig = {
 
 > The Sanity organization URL `https://www.sanity.io/organizations/op24718py` is the organization-level page, not the project ID. You need the actual project ID from the project settings.
 
-## Run Sanity Studio locally
+## Sign in to Sanity and run Studio locally
 
 ```bash
-cd sanity
-npx sanity dev
+npm run sanity:dev
 ```
 
-Then open http://localhost:3333
+The Studio uses the `t8fz3ups` project and `production` dataset. Sign in with
+`npx sanity login` and choose Google in the browser. The Google account must
+already be a member of the Sanity project; a project administrator can invite it
+from the Sanity dashboard. Then open http://localhost:3333.
