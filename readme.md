@@ -27,7 +27,7 @@ const sanityConfig = {
 npm run sanity:dev
 ```
 
-The Studio uses the `t8fz3ups` project and `production` dataset. Sign in with
+The Studio uses the `o1klbuxt` project and `production` dataset. Sign in with
 `npx sanity login` and choose Google in the browser. The Google account must
 already be a member of the Sanity project; a project administrator can invite it
 from the Sanity dashboard. Then open http://localhost:3333.

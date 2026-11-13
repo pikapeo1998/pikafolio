@@ -22,7 +22,7 @@ const projectType = {
 export default defineConfig({
   name: 'default',
   title: 'Pikapeo Portfolio',
-  projectId: 't8fz3ups',
+  projectId: 'o1klbuxt',
   dataset: 'production',
   plugins: [structureTool()],
   schema: {types: [projectType]},
