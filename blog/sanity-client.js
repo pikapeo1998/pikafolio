@@ -9,6 +9,7 @@ export const client = createClient({
   perspective: 'published',
 })
 
+
 // Lấy danh sách bài viết đã xuất bản
 export async function getPosts() {
   return client.fetch(`
@@ -21,7 +22,7 @@ export async function getPosts() {
       publishedAt,
       "category": category->title,
       "categorySlug": category->slug.current,
-      "thumbnail": thumbnail.asset->_ref,
+      "thumbnail": thumbnail.asset._ref,
       tags,
       seoTitle,
       seoDescription,
@@ -30,7 +31,9 @@ export async function getPosts() {
   `)
 }
 
-// Lấy một bài viết theo Slug
+
+
+ // Lấy một bài viết theo Slug
 export async function getPostBySlug(slug) {
   return client.fetch(`
     *[_type == "post" && slug.current == $slug][0] {
@@ -41,7 +44,7 @@ export async function getPostBySlug(slug) {
       publishedAt,
       "category": category->title,
       "categorySlug": category->slug.current,
-      "thumbnail": thumbnail.asset->_ref,
+      "thumbnail": thumbnail.asset._ref,
       tags,
       seoTitle,
       seoDescription,
