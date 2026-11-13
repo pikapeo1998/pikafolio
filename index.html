@@ -1076,13 +1076,9 @@
 
         let projects = [];
 
-        // Dynamic project template loader & checker
+        // Force default showcase to remain active at all times.
+        // Sanity integration is intentionally disabled until the user explicitly re-enables it later.
         async function initProjects() {
-            const sanityLoaded = await loadSanityProjects();
-            if (sanityLoaded) {
-                return;
-            }
-
             const currentRaw = JSON.stringify(defaultTemplates);
             const storedRaw = localStorage.getItem('pikapeo-templates-raw');
             const storedProjects = localStorage.getItem('pikapeo-projects');
@@ -1099,17 +1095,20 @@
                 }
             }
 
-            // Start from the approved default showcase, then only keep saved data if it is valid and intentionally customized.
             if (!storedRaw || storedRaw !== currentRaw) {
                 projects = [...defaultTemplates];
                 localStorage.setItem('pikapeo-projects', JSON.stringify(projects));
                 localStorage.setItem('pikapeo-templates-raw', currentRaw);
+                localStorage.setItem('pikapeo-projects-source', 'default');
             } else if (parsedStoredProjects.length > 0) {
                 projects = parsedStoredProjects;
+                localStorage.setItem('pikapeo-projects-source', 'default');
             } else {
                 projects = [...defaultTemplates];
                 localStorage.setItem('pikapeo-projects', JSON.stringify(projects));
+                localStorage.setItem('pikapeo-projects-source', 'default');
             }
+
             renderProjects('all');
         }
 
