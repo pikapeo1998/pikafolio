@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pikapeo Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030008;
+      --panel: rgba(14, 7, 22, 0.72);
+      --purple: #a855f7;
+      --pink: #ec4899;
+      --text: #f3f4f6;
+      --muted: #b4b2bc;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(168, 85, 247, 0.14), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.12), transparent 35%),
+        #030008;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(168, 85, 247, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
+
+    .glass {
+      background: rgba(14, 7, 22, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .tech-mono { font-family: 'Share Tech Mono', monospace; }
+    .neon-text { text-shadow: 0 0 12px rgba(168, 85, 247, 0.5), 0 0 24px rgba(236, 72, 153, 0.35); }
+    .post-card { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+    .post-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(168, 85, 247, 0.15); border-color: rgba(236,72,153,0.5); }
+  </style>
+</head>
+<body class="grid-bg min-h-screen">
+  <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-purple-900/30">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="cursor-pointer select-none">
+        <span class="text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">PIKAPEO._</span>
+        <span class="tech-mono text-[9px] text-pink-500/80 block tracking-[0.2em] -mt-1 pl-1">LABS SYSTEM v4.5</span>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm tracking-widest uppercase text-gray-400">
+        <a href="../index.html#about" class="hover:text-purple-400 transition-colors">About</a>
+        <a href="../index.html#work" class="hover:text-purple-400 transition-colors">Work</a>
+        <a href="index.html" class="text-pink-400 font-medium">Blog</a>
+        <a href="../index.html#ai-playground" class="text-pink-500 font-medium">AI Playground</a>
+      </div>
+
+      <a href="../index.html" class="tech-mono text-xs px-4 py-2 border border-purple-500/40 rounded bg-purple-950/20 hover:bg-purple-800/30 transition-all">← HOME</a>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 pt-28 pb-16">
+    <section class="mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 border border-pink-500/30 rounded-full bg-pink-950/20 text-pink-400 text-[10px] tracking-[0.2em] uppercase tech-mono">
+        <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+        Pikapeo Journal
+      </div>
+
+      <div class="mt-6 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <div>
+          <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight neon-text">
+            Ideas, notes <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">& stories</span>
+          </h1>
+        </div>
+        <div class="tech-mono text-xs text-gray-400 uppercase tracking-[0.2em]">3 articles / 2026</div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 xl:grid-cols-[1.5fr_0.8fr] gap-8">
+      <div class="space-y-8">
+        <article class="post-card glass rounded-2xl overflow-hidden border border-purple-900/40">
+          <div class="h-60 bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 p-6 flex items-end">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-black/20 border border-white/15 text-[10px] uppercase tracking-[0.25em] tech-mono">Featured</div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-purple-300 tech-mono mb-4">
+              <span>Branding</span>
+              <span>Nov 12, 2026</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold mb-3">Cách tạo một thương hiệu có “chạm tay” ngay từ lần đầu nhìn thấy.</h2>
+            <p class="text-gray-300 leading-relaxed">
+              Thương hiệu hiệu quả không chỉ đẹp, mà còn tạo ra cảm giác rõ ràng, đáng nhớ và dễ truyền tải trong mọi bối cảnh.
+            </p>
+            <a href="brand-identity/" class="inline-block mt-6 text-pink-400 hover:text-white transition-colors tech-mono text-[11px] uppercase tracking-[0.2em]">Read article →</a>
+          </div>
+        </article>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <article class="post-card glass rounded-2xl overflow-hidden border border-purple-900/40">
+            <div class="h-44 bg-gradient-to-br from-[#12091f] to-[#2d0d47] p-4 flex items-end">
+              <span class="inline-flex px-2 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] uppercase tracking-[0.2em] tech-mono">Design</span>
+            </div>
+            <div class="p-5">
+              <div class="text-[10px] uppercase tracking-[0.2em] text-purple-300 tech-mono mb-3">Nov 04, 2026</div>
+              <h3 class="text-xl font-bold mb-2">5 nguyên tắc thiết kế neon mà không bị “quá sáng”</h3>
+              <p class="text-sm text-gray-300 leading-relaxed">Neon không chỉ là màu sắc. Nó là nhịp độ, độ tương phản và không gian trắng để người xem hiểu điểm nhấn.</p>
+              <a href="neon-design-principles/" class="inline-block mt-4 text-pink-400 hover:text-white transition-colors tech-mono text-[10px] uppercase tracking-[0.2em]">Read article →</a>
+            </div>
+          </article>
+
+          <article class="post-card glass rounded-2xl overflow-hidden border border-purple-900/40">
+            <div class="h-44 bg-gradient-to-br from-[#090d1c] to-[#1d2d49] p-4 flex items-end">
+              <span class="inline-flex px-2 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] uppercase tracking-[0.2em] tech-mono">AI</span>
+            </div>
+            <div class="p-5">
+              <div class="text-[10px] uppercase tracking-[0.2em] text-purple-300 tech-mono mb-3">Oct 28, 2026</div>
+              <h3 class="text-xl font-bold mb-2">AI giúp sáng tạo nhanh hơn, nhưng ý tưởng vẫn do con người quyết định</h3>
+              <p class="text-sm text-gray-300 leading-relaxed">Công cụ AI tốt nhất không thay thế trực giác tạo hình, nó chỉ mở rộng khả năng thử nghiệm trong thời gian ngắn hơn.</p>
+              <a href="ai-and-creative-process/" class="inline-block mt-4 text-pink-400 hover:text-white transition-colors tech-mono text-[10px] uppercase tracking-[0.2em]">Read article →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="space-y-6">
+        <div class="glass rounded-2xl border border-purple-900/40 p-5">
+          <div class="tech-mono text-[10px] uppercase tracking-[0.24em] text-pink-400 mb-4">Categories</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-950/20 text-purple-300 text-xs">Branding</span>
+            <span class="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-950/20 text-purple-300 text-xs">Design</span>
+            <span class="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-950/20 text-purple-300 text-xs">AI</span>
+            <span class="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-950/20 text-purple-300 text-xs">Process</span>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl border border-purple-900/40 p-5">
+          <div class="tech-mono text-[10px] uppercase tracking-[0.24em] text-pink-400 mb-4">Latest notes</div>
+          <ul class="space-y-4 text-sm text-gray-300">
+            <li class="border-b border-purple-900/30 pb-3"><div class="text-[10px] uppercase tracking-[0.16em] text-purple-300 tech-mono mb-1">Process</div><p>Hệ thống thiết kế bắt đầu từ cảm xúc người xem, không phải màu sắc.</p></li>
+            <li class="border-b border-purple-900/30 pb-3"><div class="text-[10px] uppercase tracking-[0.16em] text-purple-300 tech-mono mb-1">Portfolio</div><p>Storytelling quan trọng hơn số lượng project trong một tuyển tập.</p></li>
+            <li><div class="text-[10px] uppercase tracking-[0.16em] text-purple-300 tech-mono mb-1">AI</div><p>Prompt tốt giúp rút ngắn thời gian, không phải thay đổi quyết định sáng tạo.</p></li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Detail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: radial-gradient(circle at top left, rgba(168,85,247,0.12), transparent 30%), #030008;
+      color: #f3f4f6;
+    }
+    .grid-bg { background-image: linear-gradient(to right, rgba(168,85,247,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(168,85,247,0.04) 1px, transparent 1px); background-size: 38px 38px; }
+    .glass { background: rgba(14,7,22,0.72); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+    .tech-mono { font-family: 'Share Tech Mono', monospace; }
+    .neon-text { text-shadow: 0 0 12px rgba(168, 85, 247, 0.5), 0 0 24px rgba(236, 72, 153, 0.35); }
+  </style>
+</head>
+<body class="grid-bg min-h-screen">
+  <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-purple-900/30">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="cursor-pointer select-none">
+        <span class="text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">PIKAPEO._</span>
+        <span class="tech-mono text-[9px] text-pink-500/80 block tracking-[0.2em] -mt-1 pl-1">LABS SYSTEM v4.5</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="tech-mono text-xs uppercase px-4 py-2 border border-pink-500/40 rounded bg-pink-950/20 text-pink-300 hover:bg-pink-800/30 transition-all">← Quay lại Blog</a>
+        <a href="../index.html" class="tech-mono text-[10px] uppercase tracking-[0.2em] text-gray-300 hover:text-white transition-colors">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-6 pt-28 pb-20">
+    <article id="post-content" class="glass rounded-3xl overflow-hidden border border-purple-900/40">
+      <div id="hero" class="h-72 md:h-80 bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500"></div>
+      <div class="p-6 md:p-10">
+        <div id="meta" class="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-purple-300 tech-mono mb-5"></div>
+        <h1 id="title" class="text-3xl md:text-5xl font-black uppercase mb-6 neon-text"></h1>
+        <div id="excerpt" class="text-lg text-gray-300 leading-relaxed mb-8"></div>
+        <div id="body" class="space-y-5 text-gray-200 leading-8 text-base md:text-lg"></div>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    const posts = {
+      'brand-identity': {
+        title: 'Cách tạo một thương hiệu có “chạm tay” ngay từ lần đầu nhìn thấy.',
+        category: 'Branding',
+        date: 'Nov 12, 2026',
+        hero: 'linear-gradient(135deg, #8b5cf6 0%, #d946ef 35%, #ec4899 100%)',
+        excerpt: 'Thương hiệu hiệu quả không chỉ đẹp, mà còn tạo ra cảm giác rõ ràng, đáng nhớ và dễ truyền tải trong mọi bối cảnh.',
+        body: [
+          'Thương hiệu tốt không bắt đầu bằng logo hay màu sắc. Nó bắt đầu bằng cảm giác mà bạn muốn khách hàng ghi nhớ sau 3 giây đầu tiên.',
+          'Một hệ thống thương hiệu mạnh cần có 3 thứ: sự rõ ràng, sự khác biệt và sự nhất quán. Rõ ràng ở cách người xem hiểu ngay mục tiêu của bạn; khác biệt ở cách bạn nói khác với đối thủ; nhất quán ở mọi điểm chạm, từ profile mạng xã hội đến landing page.',
+          'Và quan trọng nhất, mỗi yếu tố hình ảnh phải nói cùng một ngôn ngữ cảm xúc. Nếu bạn muốn gợi cảm giác premium, hãy làm cho không gian, chữ viết và phong cách hình ảnh cùng “nói” theo một nhịp điệu.',
+          'Đó cũng là cách tôi xây dựng các dự án thương hiệu: không nhồi nhét quá nhiều ý tưởng, mà chọn một hướng đi rõ ràng và làm đúng ở từng điểm chạm.'
+        ]
+      },
+      'neon-design-principles': {
+        title: '5 nguyên tắc thiết kế neon mà không bị “quá sáng”',
+        category: 'Design',
+        date: 'Nov 04, 2026',
+        hero: 'linear-gradient(135deg, #12091f 0%, #2d0d47 60%, #6d28d9 100%)',
+        excerpt: 'Neon không chỉ là màu sắc. Nó là nhịp độ, độ tương phản và không gian trắng để người xem hiểu điểm nhấn.',
+        body: [
+          'Màu neon dễ khiến thiết kế trở nên quá ồn nếu không kiểm soát nhịp độ. Khi dùng đỏ, tím, hồng cùng lúc, cần phải bỏ bớt một lớp “độ dày” để không làm ngập thị giác.',
+          'Không gian trắng là một phần cực kỳ quan trọng. Một lời nhắn tốt nhất thường đứng trong vùng đệm đủ để mắt người xem có thể “hơi thở” và hiểu trọng tâm.',
+          'Thiết kế neon thành công thường có 3 mức độ: nền mờ, điểm nhấn sáng, và chữ rõ. Khi ba tầng này ăn khớp, visual sẽ mang cảm giác hiện đại nhưng không rối.',
+          'Đó là điểm mà tôi luôn nhắc nhở khi làm poster hoặc landing page: không cần quá nhiều chi tiết, chỉ cần cho người xem thấy điều quan trọng nhất ngay.'
+        ]
+      },
+      'ai-and-creative-process': {
+        title: 'AI giúp sáng tạo nhanh hơn, nhưng ý tưởng vẫn do con người quyết định',
+        category: 'AI',
+        date: 'Oct 28, 2026',
+        hero: 'linear-gradient(135deg, #090d1c 0%, #1d2d49 50%, #0ea5e9 100%)',
+        excerpt: 'Công cụ AI tốt nhất không thay thế trực giác tạo hình, nó chỉ mở rộng khả năng thử nghiệm trong thời gian ngắn hơn.',
+        body: [
+          'AI đang giúp giảm thời gian khởi đầu. Khi tôi cần test nhiều hướng ý tưởng, AI cho phép mình tạo ra rất nhiều biến thể nhanh hơn trước đây.',
+          'Nhưng điều quyết định sự “đúng” của một concept không nằm ở AI. Nó nằm ở mục tiêu của thương hiệu, cảm xúc người dùng, và cách bạn định vị câu chuyện.',
+          'Nói cách khác, AI là công cụ tăng tốc. Ý tưởng vẫn là nơi con người phải đặt dấu ấn, bởi chính cảm giác và hiểu biết về ngữ cảnh mới là thứ tạo nên sự khác biệt.',
+          'Tôi luôn coi AI như một đối tác thử nghiệm, không phải người thay thế tư duy sáng tạo.'
+        ]
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug') || 'brand-identity';
+    const article = posts[slug] || posts['brand-identity'];
+
+    document.getElementById('hero').style.background = article.hero;
+    document.getElementById('meta').innerHTML = `
+      <span>${article.category}</span>
+      <span>${article.date}</span>
+    `;
+    document.getElementById('title').textContent = article.title;
+    document.getElementById('excerpt').textContent = article.excerpt;
+    document.getElementById('body').innerHTML = article.body.map(paragraph => `<p>${paragraph}</p>`).join('');
+  </script>
+</body>
+</html>
