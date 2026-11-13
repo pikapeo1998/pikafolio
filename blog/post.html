@@ -46,61 +46,194 @@
     </article>
   </main>
 
-  <script>
-    const posts = {
-      'brand-identity': {
-        title: 'Cách tạo một thương hiệu có “chạm tay” ngay từ lần đầu nhìn thấy.',
-        category: 'Branding',
-        date: 'Nov 12, 2026',
-        hero: 'linear-gradient(135deg, #8b5cf6 0%, #d946ef 35%, #ec4899 100%)',
-        excerpt: 'Thương hiệu hiệu quả không chỉ đẹp, mà còn tạo ra cảm giác rõ ràng, đáng nhớ và dễ truyền tải trong mọi bối cảnh.',
-        body: [
-          'Thương hiệu tốt không bắt đầu bằng logo hay màu sắc. Nó bắt đầu bằng cảm giác mà bạn muốn khách hàng ghi nhớ sau 3 giây đầu tiên.',
-          'Một hệ thống thương hiệu mạnh cần có 3 thứ: sự rõ ràng, sự khác biệt và sự nhất quán. Rõ ràng ở cách người xem hiểu ngay mục tiêu của bạn; khác biệt ở cách bạn nói khác với đối thủ; nhất quán ở mọi điểm chạm, từ profile mạng xã hội đến landing page.',
-          'Và quan trọng nhất, mỗi yếu tố hình ảnh phải nói cùng một ngôn ngữ cảm xúc. Nếu bạn muốn gợi cảm giác premium, hãy làm cho không gian, chữ viết và phong cách hình ảnh cùng “nói” theo một nhịp điệu.',
-          'Đó cũng là cách tôi xây dựng các dự án thương hiệu: không nhồi nhét quá nhiều ý tưởng, mà chọn một hướng đi rõ ràng và làm đúng ở từng điểm chạm.'
-        ]
-      },
-      'neon-design-principles': {
-        title: '5 nguyên tắc thiết kế neon mà không bị “quá sáng”',
-        category: 'Design',
-        date: 'Nov 04, 2026',
-        hero: 'linear-gradient(135deg, #12091f 0%, #2d0d47 60%, #6d28d9 100%)',
-        excerpt: 'Neon không chỉ là màu sắc. Nó là nhịp độ, độ tương phản và không gian trắng để người xem hiểu điểm nhấn.',
-        body: [
-          'Màu neon dễ khiến thiết kế trở nên quá ồn nếu không kiểm soát nhịp độ. Khi dùng đỏ, tím, hồng cùng lúc, cần phải bỏ bớt một lớp “độ dày” để không làm ngập thị giác.',
-          'Không gian trắng là một phần cực kỳ quan trọng. Một lời nhắn tốt nhất thường đứng trong vùng đệm đủ để mắt người xem có thể “hơi thở” và hiểu trọng tâm.',
-          'Thiết kế neon thành công thường có 3 mức độ: nền mờ, điểm nhấn sáng, và chữ rõ. Khi ba tầng này ăn khớp, visual sẽ mang cảm giác hiện đại nhưng không rối.',
-          'Đó là điểm mà tôi luôn nhắc nhở khi làm poster hoặc landing page: không cần quá nhiều chi tiết, chỉ cần cho người xem thấy điều quan trọng nhất ngay.'
-        ]
-      },
-      'ai-and-creative-process': {
-        title: 'AI giúp sáng tạo nhanh hơn, nhưng ý tưởng vẫn do con người quyết định',
-        category: 'AI',
-        date: 'Oct 28, 2026',
-        hero: 'linear-gradient(135deg, #090d1c 0%, #1d2d49 50%, #0ea5e9 100%)',
-        excerpt: 'Công cụ AI tốt nhất không thay thế trực giác tạo hình, nó chỉ mở rộng khả năng thử nghiệm trong thời gian ngắn hơn.',
-        body: [
-          'AI đang giúp giảm thời gian khởi đầu. Khi tôi cần test nhiều hướng ý tưởng, AI cho phép mình tạo ra rất nhiều biến thể nhanh hơn trước đây.',
-          'Nhưng điều quyết định sự “đúng” của một concept không nằm ở AI. Nó nằm ở mục tiêu của thương hiệu, cảm xúc người dùng, và cách bạn định vị câu chuyện.',
-          'Nói cách khác, AI là công cụ tăng tốc. Ý tưởng vẫn là nơi con người phải đặt dấu ấn, bởi chính cảm giác và hiểu biết về ngữ cảnh mới là thứ tạo nên sự khác biệt.',
-          'Tôi luôn coi AI như một đối tác thử nghiệm, không phải người thay thế tư duy sáng tạo.'
-        ]
+  
+<script type="module">
+  import { getPostBySlug, getImageUrl } from './sanity-client.js';
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
+
+  const hero = document.getElementById('hero');
+  const meta = document.getElementById('meta');
+  const title = document.getElementById('title');
+  const excerpt = document.getElementById('excerpt');
+  const body = document.getElementById('body');
+
+  // Chống lỗi HTML khi hiển thị nội dung
+  function escapeHTML(value = '') {
+    return String(value).replace(/[&<>"']/g, char => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[char]);
+  }
+
+  // Định dạng ngày đăng
+  function formatDate(date) {
+    if (!date) return '';
+
+    return new Date(date).toLocaleDateString('vi-VN', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
+  // Hiển thị nội dung Portable Text từ Sanity
+  function renderPortableText(blocks = []) {
+    if (!Array.isArray(blocks)) {
+      return `<p>${escapeHTML(blocks)}</p>`;
+    }
+
+    return blocks.map(block => {
+      // Hình ảnh trong nội dung bài viết
+      if (block._type === 'image') {
+        const image = getImageUrl(block.asset?._ref, 1200);
+
+        if (!image) return '';
+
+        return `
+          <figure class="my-8">
+            <img
+              src="${escapeHTML(image)}"
+              alt="${escapeHTML(block.alt || '')}"
+              class="w-full rounded-2xl"
+              loading="lazy"
+            >
+            ${block.caption ? `
+              <figcaption class="text-center text-sm text-gray-400 mt-3">
+                ${escapeHTML(block.caption)}
+              </figcaption>
+            ` : ''}
+          </figure>
+        `;
       }
-    };
 
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug') || 'brand-identity';
-    const article = posts[slug] || posts['brand-identity'];
+      if (block._type !== 'block') return '';
 
-    document.getElementById('hero').style.background = article.hero;
-    document.getElementById('meta').innerHTML = `
-      <span>${article.category}</span>
-      <span>${article.date}</span>
-    `;
-    document.getElementById('title').textContent = article.title;
-    document.getElementById('excerpt').textContent = article.excerpt;
-    document.getElementById('body').innerHTML = article.body.map(paragraph => `<p>${paragraph}</p>`).join('');
-  </script>
+      const children = (block.children || []).map(child => {
+        let content = escapeHTML(child.text || '');
+
+        (child.marks || []).forEach(mark => {
+          if (mark === 'strong') content = `<strong>${content}</strong>`;
+          if (mark === 'em') content = `<em>${content}</em>`;
+          if (mark === 'underline') content = `<u>${content}</u>`;
+          if (mark === 'code') content = `<code>${content}</code>`;
+
+          const link = (block.markDefs || []).find(item => item._key === mark);
+
+          if (link?._type === 'link') {
+            const url = link.href || '';
+            if (/^https?:\/\//i.test(url)) {
+              content = `<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer" class="text-pink-400 hover:text-purple-300 underline">${content}</a>`;
+            }
+          }
+        });
+
+        return content;
+      }).join('');
+
+      const style = block.style || 'normal';
+
+      const tags = {
+        h1: 'h2',
+        h2: 'h2',
+        h3: 'h3',
+        h4: 'h4',
+        blockquote: 'blockquote',
+        normal: 'p'
+      };
+
+      const tag = tags[style] || 'p';
+
+      if (style === 'blockquote') {
+        return `<blockquote class="border-l-4 border-purple-500 pl-5 italic text-purple-200 my-6">${children}</blockquote>`;
+      }
+
+      if (block.listItem === 'bullet') {
+        return `<ul class="list-disc pl-7 my-3"><li>${children}</li></ul>`;
+      }
+
+      if (block.listItem === 'number') {
+        return `<ol class="list-decimal pl-7 my-3"><li>${children}</li></ol>`;
+      }
+
+      return `<${tag} class="my-5">${children}</${tag}>`;
+    }).join('');
+  }
+
+  // Tải bài viết từ Sanity
+  async function loadPost() {
+    try {
+      if (!slug) {
+        throw new Error('Không tìm thấy slug bài viết.');
+      }
+
+      body.innerHTML = `
+        <p class="text-purple-300 tech-mono">LOADING ARTICLE...</p>
+      `;
+
+      const article = await getPostBySlug(slug);
+
+      if (!article) {
+        throw new Error('Bài viết không tồn tại hoặc chưa được xuất bản.');
+      }
+
+      // SEO
+      document.title = article.seoTitle || article.title;
+
+      let description = document.querySelector('meta[name="description"]');
+
+      if (!description) {
+        description = document.createElement('meta');
+        description.name = 'description';
+        document.head.appendChild(description);
+      }
+
+      description.content = article.seoDescription || article.excerpt || '';
+
+      // Thông tin bài viết
+      title.textContent = article.title || '';
+      excerpt.textContent = article.excerpt || '';
+
+      meta.innerHTML = `
+        <span>${escapeHTML(article.category || 'Journal')}</span>
+        <span>${escapeHTML(formatDate(article.publishedAt))}</span>
+      `;
+
+      // Ảnh đại diện
+      const image = getImageUrl(article.thumbnail, 1400);
+
+      if (image) {
+        hero.style.backgroundImage =
+          `linear-gradient(to top, rgba(0,0,0,.35), transparent), url("${image}")`;
+        hero.style.backgroundSize = 'cover';
+        hero.style.backgroundPosition = 'center';
+      }
+
+      // Nội dung bài viết
+      body.innerHTML = renderPortableText(article.content || []);
+
+    } catch (error) {
+      console.error('Lỗi tải bài viết:', error);
+
+      title.textContent = 'Không thể tải bài viết';
+
+      body.innerHTML = `
+        <p class="text-pink-400">
+          ${escapeHTML(error.message)}
+        </p>
+        <a href="index.html" class="text-purple-300 underline">
+          ← Quay lại Blog
+        </a>
+      `;
+    }
+  }
+
+  loadPost();
+</script>
+
 </body>
 </html>
