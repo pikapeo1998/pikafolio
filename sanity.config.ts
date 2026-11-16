@@ -1,14 +1,20 @@
 
 import {defineConfig, defineType, defineField, defineArrayMember} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import {documentInternationalization} from '@sanity/document-internationalization'
 
-// PROJECT: Giữ lại quản lý các dự án portfolio
+// PROJECT: Quản lý các dự án portfolio
 const projectType = defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Title', type: 'string', validation: (rule) => rule.required()}),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
     defineField({name: 'excerpt', title: 'Excerpt', type: 'text'}),
     defineField({
       name: 'category',
@@ -56,6 +62,20 @@ const postType = defineType({
       type: 'string',
       validation: (rule) => rule.required(),
     }),
+
+    // LANGUAGE: Ngôn ngữ của bài viết
+    defineField({
+      name: 'language',
+      title: 'Language',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Tiếng Việt', value: 'vi'},
+          {title: 'English', value: 'en'},
+        ],
+      },
+    }),
+
     defineField({
       name: 'slug',
       title: 'Slug / URL',
@@ -109,7 +129,21 @@ export default defineConfig({
   title: 'Pikapeo Portfolio',
   projectId: 'o1klbuxt',
   dataset: 'production',
-  plugins: [structureTool()],
+
+  // PLUGINS
+  plugins: [
+    structureTool(),
+    documentInternationalization({
+      supportedLanguages: [
+        {id: 'vi', title: 'Tiếng Việt'},
+        {id: 'en', title: 'English'},
+      ],
+      schemaTypes: ['post'],
+      languageField: 'language',
+      weakReferences: true,
+    }),
+  ],
+
   schema: {
     types: [projectType, categoryType, postType],
   },
